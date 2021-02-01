@@ -1,5 +1,6 @@
 import UsernameInput from './components/UsernameInput'
 import PasswordInputs from './components/PasswordInputs'
+import { LoginContext } from './providers/LoginProvider'
 import styled from 'styled-components'
 import {
   Card,
@@ -13,6 +14,14 @@ import "./index.css"
 const { Title } = Typography
 
 function App() {
+  const {
+    isUsernameValidated,
+    isPasswordValidated,
+    isConfirmPasswordValidated
+  } = LoginContext()
+
+  const disableCreateAccountBtn = !isUsernameValidated || !isPasswordValidated || !isConfirmPasswordValidated
+
   return (
     <AppWrapper>
       <ContentWrapper
@@ -46,7 +55,7 @@ function App() {
           </TSTTitle>
           <UsernameInput />
           <PasswordInputs />
-          <Button style={{borderColor: '#4d91db'}}>Create Account</Button>
+          <Button disabled={disableCreateAccountBtn}>Create Account</Button>
 
         </InputsWrapper>
       </ContentWrapper>

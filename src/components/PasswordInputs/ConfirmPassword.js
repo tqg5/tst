@@ -1,3 +1,4 @@
+import { LoginContext } from '../../providers/LoginProvider'
 import TSTInput, {
     TYPES
 } from '../TSTInput'
@@ -5,22 +6,24 @@ import TSTInput, {
 const errorText = `Passwords don't match`
 const successText = 'Passwords match!'
 
-export default ({
-    setText,
-    isValidated,
-    canConfirmPassword
-}) => {
+export default () => {
+    const {
+        setIsConfirmPasswordValidated,
+        isConfirmPasswordValidated,
+        canConfirmConfirmPassword
+    } = LoginContext()
+
     const onInputChange = ({ target: { value }}) => {
-        setText(value)
+        setIsConfirmPasswordValidated(value)
     }
 
     return (
         <TSTInput
             placeholder='confirm password'
             onChange={onInputChange}
-            isValidated={isValidated}
-            popoverText={isValidated ? successText : errorText}
-            showPopover={canConfirmPassword}
+            isValidated={!canConfirmConfirmPassword || isConfirmPasswordValidated}
+            popoverText={isConfirmPasswordValidated ? successText : errorText}
+            showPopover={canConfirmConfirmPassword}
             type={TYPES.PASSWORD}
         />
     )
