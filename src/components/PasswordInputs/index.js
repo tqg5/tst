@@ -10,18 +10,19 @@ export default () => {
     const [ passwordText, setPasswordText ] = useState(null)
     const [ confirmPasswordText, setConfirmPasswordText ] = useState(null)
     const [ doPasswordsMatch, setDoPasswordsMatch ] = useState(false)
-    const [ canConfirmValidate, setCanConfirmValidate ] = useState(false)
+    const [ canConfirmPassword, setCanConfirmPassword ] = useState(false)
 
     useEffect(() => {
         console.log('passwordText', passwordText)
         console.log('confirmPasswordText', confirmPasswordText)
-        if(canConfirmValidate) setDoPasswordsMatch(passwordText === confirmPasswordText)
+        if(canConfirmPassword) setDoPasswordsMatch(passwordText === confirmPasswordText)
     }, [ passwordText, confirmPasswordText ])
 
     useEffect(() => {
-        setCanConfirmValidate(!!passwordText || (!passwordText && confirmPasswordText))
+        setCanConfirmPassword(!!passwordText || (!passwordText && confirmPasswordText))
     }, [ passwordText ])
-    console.log('canConfirmValidate', canConfirmValidate)
+
+    console.log('canConfirmPassword', canConfirmPassword)
     console.log('coPasswordsMatch', doPasswordsMatch)
 
     return (
@@ -30,7 +31,8 @@ export default () => {
                 setText={setPasswordText}
             />
             <ConfirmPassword
-                isValidated={doPasswordsMatch}
+                isValidated={!canConfirmPassword || doPasswordsMatch}
+                canConfirmPassword={canConfirmPassword}
                 setText={setConfirmPasswordText}
             />
         </Fragment>

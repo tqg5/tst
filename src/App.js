@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import {
   Card,
   Typography,
-  Image
+  Image,
+  Button
 } from 'antd'
 import "antd/dist/antd.css"
 import "./index.css"
@@ -14,12 +15,20 @@ const { Title } = Typography
 function App() {
   return (
     <AppWrapper>
-      <ContentWrapper>
+      <ContentWrapper
+        bodyStyle={{
+          display: 'flex',
+          flex: 1,
+          padding: 0,
+          justifyContent: 'space-between'
+        }}
+      >
         <TitleContentWrapper>
           <Image
             width={100}
             src='https://www.booktst.com/images/logo.png'
             preview={false}
+            style={{marginLeft: 20}}
           />
           <TitleWrapper>
             <TSTTitle>
@@ -32,11 +41,13 @@ function App() {
           </TitleWrapper>
         </TitleContentWrapper>
         <InputsWrapper>
-          <TSTTitle>
+          <TSTTitle $color='black'>
             Create Account
           </TSTTitle>
           <UsernameInput />
           <PasswordInputs />
+          <Button style={{borderColor: '#4d91db'}}>Create Account</Button>
+
         </InputsWrapper>
       </ContentWrapper>
     </AppWrapper>
@@ -52,7 +63,7 @@ const AppWrapper = styled.div`
 
 const TSTTitle = styled(Title)`
   &.ant-typography {
-    color: white;
+    color: ${props => props.$color ? props.$color : 'white'};
   }
 `
 
@@ -71,15 +82,12 @@ const TitleWrapper = styled.div`
   width: 100%;
   text-align: center;
   color: white;
-  margin-left: 30px;
 `
 
 const ContentWrapper = styled(Card)`
   display: flex;
-  justify-content: center;
   height: 95%;
   width: 95%;
-
   -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
   box-shadow:         3px 3px 5px 6px #ccc;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */

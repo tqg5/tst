@@ -1,8 +1,6 @@
-import { Fragment } from 'react'
 import { Input } from 'antd'
 import styled from 'styled-components'
 import ErrorText from '../ErrorText'
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 export const TYPES = {
     USERNAME: 'username',
@@ -10,20 +8,21 @@ export const TYPES = {
 }
 
 export default ({
+    showPopover,
     isValidated,
     value,
     onChange,
     placeholder,
-    errorText,
+    popoverText,
     type = TYPES.USERNAME
 }) => {
     const Component = type === TYPES.USERNAME ? InputWrapper : PasswordWrapper
-
+    
     return (
         <Wrapper>
             <ErrorText
-                isVisible={!isValidated}
-                text={errorText}
+                isVisible={showPopover}
+                text={popoverText}
             >
                 <Component
                     placeholder={placeholder}
@@ -42,11 +41,11 @@ const Wrapper = styled.div`
 `
 
 const PasswordWrapper = styled(Input.Password)`
-    border-color: ${props => props.$isValidated ? 'green' : 'red'};
+    border-color: ${props => props.$isValidated ? '#4d91db' : 'red'};
     margin-bottom: 25px;
 `
 
 const InputWrapper = styled(Input)`
-    border-color: ${props => props.$isValidated ? 'green' : 'red'};
+    border-color: ${props => props.$isValidated ? '#4d91db' : 'red'};
     margin-bottom: 25px;
 `

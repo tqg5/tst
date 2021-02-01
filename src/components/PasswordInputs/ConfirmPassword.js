@@ -2,9 +2,13 @@ import TSTInput, {
     TYPES
 } from '../TSTInput'
 
+const errorText = `Passwords don't match`
+const successText = 'Passwords match!'
+
 export default ({
     setText,
-    isValidated
+    isValidated,
+    canConfirmPassword
 }) => {
     const onInputChange = ({ target: { value }}) => {
         setText(value)
@@ -15,7 +19,8 @@ export default ({
             placeholder='confirm password'
             onChange={onInputChange}
             isValidated={isValidated}
-            errorText={`Passwords don't match`}
+            popoverText={isValidated ? successText : errorText}
+            showPopover={canConfirmPassword}
             type={TYPES.PASSWORD}
         />
     )
