@@ -15,36 +15,21 @@ export default ({ children }) => {
         initialState
     )
 
-    //validate username
+    //validate username. username must be in an email format
     const validateUsername = email => {
         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
         return pattern.test(email)
     }
 
-    //validate password
+    //validate password. password must have more than 3 characters
+    //also password must be populated for it to be seen as tried to validate
     const validatePassword = password => {
         return !!password && password.length > 3
     }
 
-    const validateConfirmPassword = password => {
-        return !!state.passwordText || (!state.passwordText && state.confirmPasswordText)
-    }
-
-    const setPasswordText = text => {
-        dispatch({
-            type: ACTIONS.SET_PASSWORD_TEXT,
-            text
-        })
-    }
-
-    const setConfirmPasswordText = text => {
-        dispatch({
-            type: ACTIONS.SET_CONFIRM_PASSWORD_TEXT,
-            text
-        })
-    }
-
+    //check if username is validated via our validateUsername function
+    //validates on every keystroke
     const setIsUsernameValidated = text => {
         dispatch({
             type: ACTIONS.SET_IS_USERNAME_VALIDATED,
@@ -53,6 +38,8 @@ export default ({ children }) => {
         })
     }
 
+    //check if password is validated via our validatePassword function
+    //validates on every keystroke
     const setIsPasswordValidated = text => {
         dispatch({
             type: ACTIONS.SET_IS_PASSWORD_VALIDATED,
@@ -62,6 +49,7 @@ export default ({ children }) => {
         })
     }
 
+    //checks if the confirm field is the same as the password field on every keystroke
     const setIsConfirmPasswordValidated = text => {
         dispatch({
             type: ACTIONS.SET_IS_CONFIRM_PASSWORD_VALIDATED,
@@ -79,6 +67,7 @@ export default ({ children }) => {
         canConfirmConfirmPassword
     } = state
 
+    //memoizing the variables so we don't get extra renders
     const value = useMemo(() => ({
         isUsernameValidated,
         isPasswordValidated,

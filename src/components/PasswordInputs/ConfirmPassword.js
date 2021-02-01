@@ -3,26 +3,31 @@ import TSTInput, {
     TYPES
 } from '../TSTInput'
 
+//define text constants
 const errorText = `Passwords don't match`
 const successText = 'Passwords match!'
+const placeholder = 'confirm password'
 
 export default () => {
+    //retrieve props and methods from context
     const {
         setIsConfirmPasswordValidated,
         isConfirmPasswordValidated,
         canConfirmConfirmPassword
     } = LoginContext()
 
-    const onInputChange = ({ target: { value }}) => {
-        setIsConfirmPasswordValidated(value)
-    }
+    //validate on every keystroke
+    const onInputChange = ({ target: { value }}) => setIsConfirmPasswordValidated(value)
+
+    const isValidated = !canConfirmConfirmPassword || isConfirmPasswordValidated
+    const popoverText = isConfirmPasswordValidated ? successText : errorText
 
     return (
         <TSTInput
-            placeholder='confirm password'
+            placeholder={placeholder}
             onChange={onInputChange}
-            isValidated={!canConfirmConfirmPassword || isConfirmPasswordValidated}
-            popoverText={isConfirmPasswordValidated ? successText : errorText}
+            isValidated={isValidated}
+            popoverText={popoverText}
             showPopover={canConfirmConfirmPassword}
             type={TYPES.PASSWORD}
         />

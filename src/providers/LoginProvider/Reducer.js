@@ -27,16 +27,16 @@ export default (state, action) => {
                 isUsernameValidated: isValidated
             }
         case ACTIONS.SET_IS_PASSWORD_VALIDATED:
-            debugger
             return {
                 ...state,
                 canConfirmPassword: canConfirm,
                 isPasswordValidated: isValidated,
+                //we want to check if the password fields contain the same text on the keystrokes of both fields so
+                //we check in this reducer action as well
                 isConfirmPasswordValidated: text === state.confirmPasswordText,
                 passwordText: text
             }
         case ACTIONS.SET_IS_CONFIRM_PASSWORD_VALIDATED:
-            debugger
             return {
                 ...state,
                 canConfirmConfirmPassword: canConfirm,

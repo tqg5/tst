@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import SuperProvider from './components/SuperProvider'
-import './index.css';
-import App from './App';
+import './index.css'
+import App from './App/index.js'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,4 +11,4 @@ ReactDOM.render(
     </SuperProvider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+)
